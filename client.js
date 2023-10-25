@@ -1,26 +1,24 @@
 const net = require("net");
 
-const connect = function () {
+const connect = function() {
   const conn = net.createConnection({
-    host: "localhost",
-    port: 50541
+    port: 50541,
+    host: "165.227.47.243"
   });
 
   conn.setEncoding("utf8");
 
+  conn.on("connect", () => {
+    console.log("Succesfully connected to game server");
+  });
+
+  conn.write("Name: RRR");{
+  };
+
   conn.on("data", (data) => {
     console.log("Received data:", data);
   });
-
-  conn.on("connect", () => {
-    console.log("Succesfully connected to game server");
-    conn.write("Name: RRR");
-  });
   
-  setTimeout(() => {
-    conn.write("Move: up");
-  }, 3000);
-
   return conn;
 };
 
